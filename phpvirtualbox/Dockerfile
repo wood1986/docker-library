@@ -9,17 +9,7 @@ RUN curl -L http://sourceforge.net/projects/phpvirtualbox/files/latest/download 
 
 RUN apt-get clean
 
-ARG USERNAME=vbox
-
-ARG PASSWORD=pass
-
-ARG LOCATION=http://vboxwebsrv:18083/
-
 RUN mv phpvirtualbox-* phpvirtualbox && \
     mv phpvirtualbox/* ./ && \
     rm -rf phpvirtualbox && \
     mv config.php-example config.php
-
-RUN sed "0,\|'vbox'|s||'$USERNAME'|" -i config.php && \
-    sed "0,\|'pass'|s||'$PASSWORD'|" -i config.php && \
-    sed "0,\|'http://127.0.0.1:18083/'|s||'$LOCATION'|" -i config.php
