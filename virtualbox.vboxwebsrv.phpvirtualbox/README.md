@@ -1,4 +1,4 @@
-## Changlelong
+## Changelog
 
 * Support VirtualBox 5.0
 * Separate into VirtualBox and PHPVirtualBox
@@ -12,14 +12,22 @@
 
 ### How can I use my own settings?
 
-* You don't have to modify any `Dockfile`.
-* Take a look the `virtualbox.vboxwebsrv.phpvirtualbox/Makefile`.
-* You just need to modify the variables in `Makefile` at the top.
+* You don't have to modify any `Dockerfile`s.
 
-### Why can't I build on my machine?
+* Take a look the `virtualbox.vboxwebsrv.phpvirtualbox/Makefile`.
+
+* You just need to modify the variables at the top of `Makefile`.
+
+### Why can't I build or run on my machine?
 
 * To build it successfully, you have to check two things.
   * Host's kernel build must be located at `/lib/modules/`.
-  * Host's version must be same as `kernel-devel` version installed in container.
+  * Host's kernel version must be same as `kernel-devel` version which will be installed inside the container.
 
-So I recommend the OS of the host and the container should use the same distribution and version.
+* To run it successfully, you have to check two things.
+  * `--privileged` and  `-v /lib/modules/:/lib/modules/` are required to run `vboxwebsrv`
+  * `--link $(VBOXWEBSRV)` is required to run `phpvirtualbox`
+
+* So I recommend host's OS and container's image should be in the same Linux distribution and version.
+
+* Again, please refer to `virtualbox.vboxwebsrv.phpvirtualbox/Makefile`. You will learn a lot from this file.
