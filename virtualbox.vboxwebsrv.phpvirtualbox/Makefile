@@ -3,6 +3,7 @@ PHPVIRTUALBOX = phpvirtualbox
 USERNAME = vbox
 PASSWORD = pass
 LOCATION = http://vboxwebsrv:18083/
+VOLUMES =
 ARGS = -H 0.0.0.0
 PORT = 80
 
@@ -22,7 +23,7 @@ clean:
 	fi;
 
 run:
-	docker run -dit -v /lib/modules/:/lib/modules/ --cidfile $(VBOXWEBSRV).cid --name $(VBOXWEBSRV) --privileged $(VBOXWEBSRV) $(ARGS)
+	docker run -dit -v /lib/modules/:/lib/modules/ $(VOLUMES) --cidfile $(VBOXWEBSRV).cid --name $(VBOXWEBSRV) --privileged $(VBOXWEBSRV) $(ARGS)
 	docker run -dit -p $(PORT):80 --cidfile $(PHPVIRTUALBOX).cid --link $(VBOXWEBSRV) --name $(PHPVIRTUALBOX) $(PHPVIRTUALBOX)
 
 dist: clean build run
