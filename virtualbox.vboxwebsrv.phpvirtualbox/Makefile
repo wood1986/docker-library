@@ -15,13 +15,13 @@ clean:
 	if [ -a $(VBOXWEBSRV).cid ]; then \
 		docker rm $$(docker stop $$(cat $(VBOXWEBSRV).cid)); \
 		rm -rf $(VBOXWEBSRV).cid; \
-    docker rmi $(VBOXWEBSRV); \
+		docker rmi $(VBOXWEBSRV); \
 	fi;
 
 	if [ -a $(PHPVIRTUALBOX).cid ]; then \
 		docker rm $$(docker stop $$(cat $(PHPVIRTUALBOX).cid)); \
 		rm -rf $(PHPVIRTUALBOX).cid; \
-    docker rmi $(PHPVIRTUALBOX); \
+		docker rmi $(PHPVIRTUALBOX); \
 	fi;
 
 run:
