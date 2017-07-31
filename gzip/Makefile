@@ -1,14 +1,15 @@
 VERSION = 1.8
-GZIP = gzip
+NAME = gzip
 
 build:
-	docker build -t $(GZIP) --build-arg VERSION=$(VERSION) .
+	docker build -t $(NAME) --build-arg VERSION=$(VERSION) .
 
 clean:
-	docker rmi $(GZIP);
+	docker rmi $(NAME);
 
 install:
 	yum install gcc
-	docker run -it --rm -v /usr/:/usr/ $(GZIP)
+	docker run -it --rm -v /usr/:/usr/ $(NAME)
+	yum remove gcc
 
 dist: build install clean
