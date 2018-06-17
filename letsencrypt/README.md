@@ -5,6 +5,5 @@
 ## How to use it?
 
 ```
-export DOMAIN=<your.domain>
-docker-compose up --abort-on-container-exit
+make DOMAIN="<your.domain>" dist
 ```
