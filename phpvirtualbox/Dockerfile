@@ -2,14 +2,13 @@ FROM php:apache
 
 RUN apt-get update && apt-get -y install libxml2 libxml2-dev && docker-php-ext-install soap
 
-RUN curl -L http://sourceforge.net/projects/phpvirtualbox/files/latest/download -o phpvirtualbox.zip && \
+ARG VERSION=
+
+RUN curl -LO https://github.com/phpvirtualbox/phpvirtualbox/archive/$VERSION.zip  && \
     apt-get -y install unzip && \
-    unzip phpvirtualbox.zip && \
-    rm -rf phpvirtualbox.zip
+    unzip $VERSION.zip && \
+    rm -rf $VERSION.zip
 
 RUN apt-get clean
 
-RUN mv phpvirtualbox-* phpvirtualbox && \
-    mv phpvirtualbox/* ./ && \
-    rm -rf phpvirtualbox && \
-    mv config.php-example config.php
+RUN mv phpvirtualbox-$VERSION/config.php-example phpvirtualbox-$VERSION/config.php
